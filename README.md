@@ -6,8 +6,7 @@ Unix Desktop Support Kit.
 
 * GCC v4.8.5+ or Clang v3.3+
 * CMake v3.5+
-* Qt v5.9+ Core/DBus
-* Working D-Bus installation
+* Qt v5.9+ Core
 
 ## Kits
 
