@@ -1,12 +1,7 @@
-# DesktopKit *(draft)*
+# org.DesktopKit *(draft)*
 
 Unix Desktop Support Kit.
 
 ## Kits
 
-* Desktop
-* Disks
-* Files
-* Media
-* Network
-* Power
+* [BaseDir](kits/basedir/README.md)
