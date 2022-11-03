@@ -10,17 +10,34 @@ Various libraries, services and utilities for (Qt) desktop applications.
 
 ### Core
 
-* GCC v4.8.5+ or Clang v3.3+
 * CMake v3.5+
 * Qt v5.9+ Core
 
 ## Build
 
 ```
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib64 -DCMAKE_BUILD_TYPE=Release ..
 make
 make DESTDIR=<package> install
+```
+```
+└── usr
+    ├── include
+    │   └── DesktopKit
+    │       └── basedir.h
+    ├── lib64
+    │   ├── libDesktopKit.BaseDir.so -> libDesktopKit.BaseDir.so.1
+    │   ├── libDesktopKit.BaseDir.so.1 -> libDesktopKit.BaseDir.so.1.0.0
+    │   ├── libDesktopKit.BaseDir.so.1.0.0
+    │   └── pkgconfig
+    │       └── DesktopKit.BaseDir.pc
+    └── share
+        └── doc
+            └── DesktopKit-1.0.0
+                ├── LICENSE
+                └── README.md
 ```
 
 ## Kits
