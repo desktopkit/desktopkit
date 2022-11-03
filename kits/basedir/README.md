@@ -39,3 +39,20 @@ Single base directory relative to which user-specific non-essential (cached) dat
 * `DESKTOP_CACHE_HOME`
 * `XDG_CACHE_HOME`
 * `HOME/.cache`
+
+## `getDesktopPath`
+## `getDocumentsPath`
+## `getFontsPaths`
+## `getApplicationsPaths`
+## `getMusicPath`
+## `getMoviesPath`
+## `getPicturesPath`
+## `getTempPath`
+## `getDownloadPath`
+## `getTrashPath`
+## `getIconsPaths`
+## `getPixmapPaths`
+## `getMimeGlobPaths`
+## `getMimeGenericPaths`
+## `getMimeTypePaths`
+## `getThumbnailsPath`
