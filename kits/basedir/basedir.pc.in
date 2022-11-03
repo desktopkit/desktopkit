@@ -7,4 +7,4 @@ Description: @PROJECT_NAME@
 URL: https://desktopkit.org
 Version: @PROJECT_VERSION@
 Cflags: -I"${includedir}"
-Libs: -L"${libdir}" -lDesktopKit.BaseDir
+Libs: -L"${libdir}" -l@PROJECT_NAME@
