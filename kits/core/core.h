@@ -46,6 +46,7 @@ namespace DesktopKit
             static const std::vector<std::string> getApplicationsPaths();
             static const std::string getCachePath();
             static const std::string getConfigPath();
+            static const std::vector<std::string> getColorProfilesPaths();
             static const std::string getDataPath();
             static const std::vector<std::string> getDataPaths();
             static const std::string getDesktopPath();
@@ -59,7 +60,7 @@ namespace DesktopKit
             static const std::string getMoviesPath();
             static const std::string getMusicPath();
             static const std::string getPicturesPath();
-            static const std::vector<std::string> getPixmapPaths();
+            static const std::vector<std::string> getPixmapsPaths();
             static const std::string getStatePath();
             static const std::string getTempPath();
             static const std::string getThumbnailsPath();
