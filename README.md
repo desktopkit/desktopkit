@@ -42,13 +42,13 @@ make DESTDIR=<package> install
 
 ## Kits
 
-* org.DesktopKit.App (#3)
-* org.DesktopKit.[BaseDir](kits/basedir/README.md) (#2)
-* org.DesktopKit.Disks (#5)
-* org.DesktopKit.Files (#9)
-* org.DesktopKit.Media (#7)
-* org.DesktopKit.Network (#10)
-* org.DesktopKit.Power (#8)
-* org.DesktopKit.Thumbnails (#4)
-* org.DesktopKit.Trash (#6)
-* org.DesktopKit.X11 (#11)
+* org.DesktopKit.App (https://github.com/desktopkit/desktopkit/issues/3)
+* org.DesktopKit.[BaseDir](kits/basedir/README.md) https://github.com/desktopkit/desktopkit/issues/2)
+* org.DesktopKit.Disks (https://github.com/desktopkit/desktopkit/issues/5)
+* org.DesktopKit.Files (https://github.com/desktopkit/desktopkit/issues/9)
+* org.DesktopKit.Media (https://github.com/desktopkit/desktopkit/issues/7)
+* org.DesktopKit.Network (https://github.com/desktopkit/desktopkit/issues/10)
+* org.DesktopKit.Power (https://github.com/desktopkit/desktopkit/issues/8)
+* org.DesktopKit.Thumbnails (https://github.com/desktopkit/desktopkit/issues/4)
+* org.DesktopKit.Trash (https://github.com/desktopkit/desktopkit/issues/6)
+* org.DesktopKit.X11 (https://github.com/desktopkit/desktopkit/issues/11)
