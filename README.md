@@ -42,4 +42,13 @@ make DESTDIR=<package> install
 
 ## Kits
 
-* *org.DesktopKit.*[BaseDir](kits/basedir/README.md)
+* org.DesktopKit.App (#3)
+* org.DesktopKit.[BaseDir](kits/basedir/README.md) (#2)
+* org.DesktopKit.Disks (#5)
+* org.DesktopKit.Files (#9)
+* org.DesktopKit.Media (#7)
+* org.DesktopKit.Network (#10)
+* org.DesktopKit.Power (#8)
+* org.DesktopKit.Thumbnails (#4)
+* org.DesktopKit.Trash (#6)
+* org.DesktopKit.X11 (#11)
