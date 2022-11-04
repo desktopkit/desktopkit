@@ -25,21 +25,16 @@
 
 #include "core.h"
 
-#include <QString>
-#include <QDebug>
+#include <iostream>
 
-const std::string
-DesktopKit::Core::Common::getEnv(const std::string &key)
-{
-    QString value;
-    if ( !key.empty() ) { value = qgetenv( key.c_str() ); }
-    return value.toStdString();
-}
+using namespace DesktopKit::Core;
 
-bool
-DesktopKit::Core::Common::setEnv(const std::string &key,
-                                 const std::string &value)
+int main()
 {
-    if ( key.empty() ) { return false; }
-    return qputenv( key.c_str(), value.c_str() );
+    std::cout << "getApplicationsPaths:" << std::endl << std::endl;
+    std::vector<std::string> applicationsDirs = BaseDir::getApplicationsPaths();
+    for (auto &dir : applicationsDirs) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    return 0;
 }

@@ -26,12 +26,29 @@
 #include "core.h"
 
 #include <QString>
+#include <QStringList>
 #include <QDebug>
+#include <QFile>
+#include <QDir>
+#include <QStandardPaths>
+
+using namespace DesktopKit::Core;
 
 const std::vector<std::string>
 DesktopKit::Core::BaseDir::getApplicationsPaths()
 {
     std::vector<std::string> paths;
+
+    QString appdir = QString("%1/Applications").arg( QDir::home().absolutePath() );
+    paths.push_back( appdir.toStdString() );
+
+    QStringList locations = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
+    for (int i = 0; i < locations.size(); ++i) { paths.push_back( locations.at(i).toStdString() );}
+
+    QStringList bins = QString::fromStdString( Common::getEnv("PATH") ).split(":",
+                                                                              Qt::SkipEmptyParts);
+    for (int i = 0; i < bins.size(); ++i) { paths.push_back( bins.at(i).toStdString() );}
+
     return paths;
 }
 
