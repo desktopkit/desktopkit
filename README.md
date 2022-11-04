@@ -42,7 +42,7 @@ make DESTDIR=<package> install
 ## Kits
 
 * org.DesktopKit.App (https://github.com/desktopkit/desktopkit/issues/3)
-* org.DesktopKit.[Core](kits/core/README.md) https://github.com/desktopkit/desktopkit/issues/2)
+* org.DesktopKit.Core (https://github.com/desktopkit/desktopkit/issues/2)
 * org.DesktopKit.Disks (https://github.com/desktopkit/desktopkit/issues/5)
 * org.DesktopKit.Files (https://github.com/desktopkit/desktopkit/issues/9)
 * org.DesktopKit.Media (https://github.com/desktopkit/desktopkit/issues/7)

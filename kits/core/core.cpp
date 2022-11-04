@@ -28,7 +28,165 @@
 #include <QString>
 #include <QDebug>
 
-DesktopKit::Core::BaseDir::BaseDir()
+const std::string
+DesktopKit::Core::Common::getEnv(const std::string &key)
 {
-    qDebug() << "org.DesktopKit.Core::BaseDir";
+    QString value;
+    if ( !key.empty() ) { value = qgetenv( key.c_str() ); }
+    return value.toStdString();
+}
+
+bool
+DesktopKit::Core::Common::setEnv(const std::string &key,
+                                 const std::string &value)
+{
+    if ( key.empty() ) { return false; }
+    return qputenv( key.c_str(), value.c_str() );
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getApplicationsPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getCachePath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getConfigPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getDataPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getDataPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getDesktopPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getDocumentsPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getDownloadPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getFontsPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getIconsPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getMimeGenericPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getMimeGlobPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getMimeTypePaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getMoviesPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getMusicPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getPicturesPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getPixmapPaths()
+{
+    std::vector<std::string> paths;
+    return paths;
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getStatePath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getTempPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getThumbnailsPath()
+{
+    QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getTrashPath()
+{
+    QString path;
+    return path.toStdString();
 }
