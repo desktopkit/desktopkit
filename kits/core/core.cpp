@@ -23,18 +23,12 @@
 #
 */
 
-#ifndef DK_BASEDIR_H
-#define DK_BASEDIR_H
+#include "core.h"
 
-#include <string>
+#include <QString>
+#include <QDebug>
 
-namespace DesktopKit
+DesktopKit::Core::BaseDir::BaseDir()
 {
-    class BaseDir
-    {
-    public:
-        BaseDir();
-    };
+    qDebug() << "org.DesktopKit.Core::BaseDir";
 }
-
-#endif // DK_BASEDIR_H

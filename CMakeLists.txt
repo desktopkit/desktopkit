@@ -27,7 +27,7 @@ project(DesktopKit VERSION 1.0.0)
 
 include(GNUInstallDirs)
 
-add_subdirectory(kits/basedir)
+add_subdirectory(kits/core)
 
 install(FILES README.md LICENSE
         DESTINATION ${CMAKE_INSTALL_DOCDIR}-${PROJECT_VERSION})

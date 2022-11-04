@@ -1,6 +1,6 @@
-# org.DesktopKit.BaseDir
+# org.DesktopKit.Core
 
-## `getDataPath`
+## `BaseDir::getDataPath`
 
 Single base directory relative to which user-specific data files should be written.
 
@@ -8,7 +8,7 @@ Single base directory relative to which user-specific data files should be writt
 * `XDG_DATA_HOME`
 * `HOME/.local/share`
 
-## `getDataPaths`
+## `BaseDir::getDataPaths`
 
 Set of preference ordered base directories relative to which data files should be searched.
 
@@ -16,7 +16,7 @@ Set of preference ordered base directories relative to which data files should b
 * `XDG_DATA_DIRS`
 * `/usr/local/share/:/usr/share/`
 
-## `getConfigPath`
+## `BaseDir::getConfigPath`
 
 Single base directory relative to which user-specific configuration files should be written.
 
@@ -24,7 +24,7 @@ Single base directory relative to which user-specific configuration files should
 * `XDG_CONFIG_HOME`
 * `HOME/.config`
 
-## `getStatePath`
+## `BaseDir::getStatePath`
 
 Single base directory relative to which user-specific state data should be written.
 
@@ -32,7 +32,7 @@ Single base directory relative to which user-specific state data should be writt
 * `XDG_STATE_HOME`
 * `HOME/.local/state`
 
-## `getCachePath`
+## `BaseDir::getCachePath`
 
 Single base directory relative to which user-specific non-essential (cached) data should be written. 
 
@@ -40,19 +40,19 @@ Single base directory relative to which user-specific non-essential (cached) dat
 * `XDG_CACHE_HOME`
 * `HOME/.cache`
 
-## `getDesktopPath`
-## `getDocumentsPath`
-## `getFontsPaths`
-## `getApplicationsPaths`
-## `getMusicPath`
-## `getMoviesPath`
-## `getPicturesPath`
-## `getTempPath`
-## `getDownloadPath`
-## `getTrashPath`
-## `getIconsPaths`
-## `getPixmapPaths`
-## `getMimeGlobPaths`
-## `getMimeGenericPaths`
-## `getMimeTypePaths`
-## `getThumbnailsPath`
+## `BaseDir::getDesktopPath`
+## `BaseDir::getDocumentsPath`
+## `BaseDir::getFontsPaths`
+## `BaseDir::getApplicationsPaths`
+## `BaseDir::getMusicPath`
+## `BaseDir::getMoviesPath`
+## `BaseDir::getPicturesPath`
+## `BaseDir::getTempPath`
+## `BaseDir::getDownloadPath`
+## `BaseDir::getTrashPath`
+## `BaseDir::getIconsPaths`
+## `BaseDir::getPixmapPaths`
+## `BaseDir::getMimeGlobPaths`
+## `BaseDir::getMimeGenericPaths`
+## `BaseDir::getMimeTypePaths`
+## `BaseDir::getThumbnailsPath`

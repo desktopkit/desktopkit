@@ -23,7 +23,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(DesktopKit.BaseDir VERSION 1.0.0 LANGUAGES CXX)
+project(DesktopKit.Core VERSION 1.0.0 LANGUAGES CXX)
 
 include(GNUInstallDirs)
 
@@ -42,15 +42,15 @@ add_compile_options(-Wall -Wextra)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED basedir.cpp basedir.h)
+add_library(${PROJECT_NAME} SHARED core.cpp core.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "basedir.h")
+set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "core.h")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/basedir.pc.in
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/core.pc.in
                ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc
                @ONLY)
 

@@ -1,8 +1,8 @@
-# org.DesktopKit *(draft)*
+# DesktopKit *(draft)*
 
 Unix Desktop Framework Kit.
 
-Various libraries, services and utilities for (Qt) desktop applications.
+Various libraries, services and utilities for (Qt/C++) desktop applications.
 
 **Currently in draft mode**
 
@@ -10,8 +10,7 @@ Various libraries, services and utilities for (Qt) desktop applications.
 
 ### Core
 
-* CMake v3.5+
-* Qt v5.9+ Core
+* Qt v5+ Core
 
 ## Build
 
@@ -26,13 +25,13 @@ make DESTDIR=<package> install
 └── usr
     ├── include
     │   └── DesktopKit
-    │       └── basedir.h
+    │       └── core.h
     ├── lib64
-    │   ├── libDesktopKit.BaseDir.so -> libDesktopKit.BaseDir.so.1
-    │   ├── libDesktopKit.BaseDir.so.1 -> libDesktopKit.BaseDir.so.1.0.0
-    │   ├── libDesktopKit.BaseDir.so.1.0.0
+    │   ├── libDesktopKit.Core.so -> libDesktopKit.Core.so.1
+    │   ├── libDesktopKit.Core.so.1 -> libDesktopKit.Core.so.1.0.0
+    │   ├── libDesktopKit.Core.so.1.0.0
     │   └── pkgconfig
-    │       └── DesktopKit.BaseDir.pc
+    │       └── DesktopKit.Core.pc
     └── share
         └── doc
             └── DesktopKit-1.0.0
@@ -43,7 +42,7 @@ make DESTDIR=<package> install
 ## Kits
 
 * org.DesktopKit.App (https://github.com/desktopkit/desktopkit/issues/3)
-* org.DesktopKit.[BaseDir](kits/basedir/README.md) https://github.com/desktopkit/desktopkit/issues/2)
+* org.DesktopKit.[Core](kits/core/README.md) https://github.com/desktopkit/desktopkit/issues/2)
 * org.DesktopKit.Disks (https://github.com/desktopkit/desktopkit/issues/5)
 * org.DesktopKit.Files (https://github.com/desktopkit/desktopkit/issues/9)
 * org.DesktopKit.Media (https://github.com/desktopkit/desktopkit/issues/7)
