@@ -39,7 +39,7 @@ DesktopKit::Core::BaseDir::getApplicationsPaths()
 {
     std::vector<std::string> paths;
 
-    QString appdir = QString("%1/Applications").arg( QDir::home().absolutePath() );
+    QString appdir = QString("%1/Applications").arg( QDir::homePath() );
     paths.push_back( appdir.toStdString() );
 
     QStringList locations = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
@@ -55,15 +55,13 @@ DesktopKit::Core::BaseDir::getApplicationsPaths()
 const std::string
 DesktopKit::Core::BaseDir::getCachePath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathCache, "CACHE_HOME", ".cache");
 }
 
 const std::string
 DesktopKit::Core::BaseDir::getConfigPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathConfig, "CONFIG_HOME", ".config");
 }
 
 const std::vector<std::string>
@@ -76,42 +74,42 @@ DesktopKit::Core::BaseDir::getColorProfilesPaths()
 const std::string
 DesktopKit::Core::BaseDir::getDataPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathData, "DATA_HOME", ".local/share");
 }
 
 const std::vector<std::string>
 DesktopKit::Core::BaseDir::getDataPaths()
 {
     std::vector<std::string> paths;
+    QStringList locations = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+    for (int i = 0; i < locations.size(); ++i) { paths.push_back( locations.at(i).toStdString() );}
     return paths;
 }
 
 const std::string
 DesktopKit::Core::BaseDir::getDesktopPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathDesktop, "", "Desktop");
 }
 
 const std::string
 DesktopKit::Core::BaseDir::getDocumentsPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathDocuments, "", "Documents");
 }
 
 const std::string
 DesktopKit::Core::BaseDir::getDownloadPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathDownload, "", "Downloads");
 }
 
 const std::vector<std::string>
 DesktopKit::Core::BaseDir::getFontsPaths()
 {
     std::vector<std::string> paths;
+    QStringList locations = QStandardPaths::standardLocations(QStandardPaths::FontsLocation);
+    for (int i = 0; i < locations.size(); ++i) { paths.push_back( locations.at(i).toStdString() );}
     return paths;
 }
 
@@ -144,24 +142,15 @@ DesktopKit::Core::BaseDir::getMimeTypePaths()
 }
 
 const std::string
-DesktopKit::Core::BaseDir::getMoviesPath()
-{
-    QString path;
-    return path.toStdString();
-}
-
-const std::string
 DesktopKit::Core::BaseDir::getMusicPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathMusic, "", "Music");
 }
 
 const std::string
 DesktopKit::Core::BaseDir::getPicturesPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathPictures, "", "Pictures");
 }
 
 const std::vector<std::string>
@@ -172,17 +161,9 @@ DesktopKit::Core::BaseDir::getPixmapsPaths()
 }
 
 const std::string
-DesktopKit::Core::BaseDir::getStatePath()
-{
-    QString path;
-    return path.toStdString();
-}
-
-const std::string
 DesktopKit::Core::BaseDir::getTempPath()
 {
-    QString path;
-    return path.toStdString();
+    return getPath(BaseDirPath::pathTemp);
 }
 
 const std::string
@@ -196,5 +177,79 @@ const std::string
 DesktopKit::Core::BaseDir::getTrashPath()
 {
     QString path;
+    return path.toStdString();
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getVideosPath()
+{
+    return getPath(BaseDirPath::pathVideos, "", "Videos");
+}
+
+const std::string
+DesktopKit::Core::BaseDir::getPath(int type,
+                                   const std::string &suffix,
+                                   const std::string &fallback)
+{
+    QString path;
+
+    if ( !suffix.empty() ) {
+        path = QString::fromStdString( Common::getEnv( QString("DESKTOP_%1")
+                                                       .arg( QString::fromStdString(suffix) )
+                                                       .toStdString() ) );
+        if ( path.isEmpty() ) {
+            path = QString::fromStdString( Common::getEnv( QString("XDG_%1")
+                                                           .arg( QString::fromStdString(suffix) )
+                                                           .toStdString() ) );
+        }
+    }
+
+    if ( path.isEmpty() && type >= 0) {
+        QStandardPaths::StandardLocation location;
+        switch (type) {
+        case BaseDirPath::pathCache:
+            location = QStandardPaths::CacheLocation;
+            break;
+        case BaseDirPath::pathConfig:
+            location = QStandardPaths::ConfigLocation;
+            break;
+        case BaseDirPath::pathData:
+            location = QStandardPaths::DataLocation;
+            break;
+        case BaseDirPath::pathDesktop:
+            location = QStandardPaths::DesktopLocation;
+            break;
+        case BaseDirPath::pathDocuments:
+            location = QStandardPaths::DocumentsLocation;
+            break;
+        case BaseDirPath::pathDownload:
+            location = QStandardPaths::DownloadLocation;
+            break;
+        case BaseDirPath::pathVideos:
+            location = QStandardPaths::MoviesLocation;
+            break;
+        case BaseDirPath::pathMusic:
+            location = QStandardPaths::MusicLocation;
+            break;
+        case BaseDirPath::pathPictures:
+            location = QStandardPaths::PicturesLocation;
+            break;
+        case BaseDirPath::pathTemp:
+            location = QStandardPaths::TempLocation;
+            break;
+        default:
+            location = QStandardPaths::HomeLocation;
+        }
+        QStringList locations = QStandardPaths::standardLocations(location);
+        if (locations.size() > 0) { path = locations.at(0); }
+    }
+
+    if ( path.isEmpty() &&
+         !fallback.empty() )
+    {
+        qDebug() << "path using fallback";
+        path = QString("%1/%2").arg( QDir::homePath(),
+                                     QString::fromStdString(fallback) ); }
+
     return path.toStdString();
 }

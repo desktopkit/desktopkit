@@ -31,10 +31,28 @@ using namespace DesktopKit::Core;
 
 int main()
 {
-    std::cout << "getApplicationsPaths:" << std::endl << std::endl;
-    std::vector<std::string> applicationsDirs = BaseDir::getApplicationsPaths();
-    for (auto &dir : applicationsDirs) { std::cout << dir << std::endl; }
+    std::cout << "getApplicationsPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getApplicationsPaths() ) { std::cout << dir << std::endl; }
     std::cout << std::endl;
+
+    std::cout << "getDataPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getDataPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "getFontsPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getFontsPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "getCachePath: " << BaseDir::getCachePath() << std::endl;
+    std::cout << "getConfigPath: " << BaseDir::getConfigPath() << std::endl;
+    std::cout << "getDataPath: " << BaseDir::getDataPath() << std::endl;
+    std::cout << "getDesktopPath: " << BaseDir::getDesktopPath() << std::endl;
+    std::cout << "getDocumentsPath: " << BaseDir::getDocumentsPath() << std::endl;
+    std::cout << "getDownloadPath: " << BaseDir::getDownloadPath() << std::endl;
+    std::cout << "getMusicPath: " << BaseDir::getMusicPath() << std::endl;
+    std::cout << "getPicturesPath: " << BaseDir::getPicturesPath() << std::endl;
+    std::cout << "getTempPath: " << BaseDir::getTempPath() << std::endl;
+    std::cout << "getVideosPath: " << BaseDir::getVideosPath() << std::endl;
 
     return 0;
 }
