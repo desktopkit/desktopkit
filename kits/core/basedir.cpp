@@ -170,14 +170,14 @@ DesktopKit::Core::BaseDir::getTempPath()
 const std::string
 DesktopKit::Core::BaseDir::getThumbnailsPath()
 {
-    QString path;
+    QString path = QString("%1/thumbnails").arg( QString::fromStdString( getCachePath() ) );
     return path.toStdString();
 }
 
 const std::string
 DesktopKit::Core::BaseDir::getTrashPath()
 {
-    QString path;
+    QString path = QString("%1/Trash").arg( QString::fromStdString( getDataPath() ) );
     return path.toStdString();
 }
 

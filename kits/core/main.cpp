@@ -56,6 +56,8 @@ int main()
     std::cout << "getMusicPath: " << BaseDir::getMusicPath() << std::endl;
     std::cout << "getPicturesPath: " << BaseDir::getPicturesPath() << std::endl;
     std::cout << "getTempPath: " << BaseDir::getTempPath() << std::endl;
+    std::cout << "getThumbnailsPath: " << BaseDir::getThumbnailsPath() << std::endl;
+    std::cout << "getTrashPath: " << BaseDir::getTrashPath() << std::endl;
     std::cout << "getVideosPath: " << BaseDir::getVideosPath() << std::endl;
 
     return 0;
