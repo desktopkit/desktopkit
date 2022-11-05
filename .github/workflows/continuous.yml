@@ -1,0 +1,20 @@
+name: Continuous
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: apt
+      run: sudo apt-get update && sudo apt-get install qt5-default qtbase5-dev cmake tree
+    - name: Build and Package
+      run: |
+        mkdir build && cd build
+        cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib64 -DCMAKE_BUILD_TYPE=Release ..
+        make
+        make DESTDIR=`pwd`/package install
+        tree package
