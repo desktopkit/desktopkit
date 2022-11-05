@@ -31,6 +31,13 @@
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
+#include <QtGlobal>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+#define QT_SKIP_EMPTY QString::SkipEmptyParts
+#else
+#define QT_SKIP_EMPTY Qt::SkipEmptyParts
+#endif
 
 using namespace DesktopKit::Core;
 
@@ -41,8 +48,7 @@ DesktopKit::Core::BaseDir::getApplicationsPaths()
     paths.push_back( QString("%1/Applications").arg( QDir::homePath() ).toStdString() );
     QStringList locations = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
     for (int i = 0; i < locations.size(); ++i) { paths.push_back( locations.at(i).toStdString() );}
-    QStringList bins = QString::fromStdString( Common::getEnv("PATH") ).split(":",
-                                                                              Qt::SkipEmptyParts);
+    QStringList bins = QString::fromStdString( Common::getEnv("PATH") ).split(":", QT_SKIP_EMPTY);
     for (int i = 0; i < bins.size(); ++i) { paths.push_back( bins.at(i).toStdString() );}
     return paths;
 }
