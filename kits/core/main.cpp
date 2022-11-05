@@ -43,6 +43,10 @@ int main()
     for ( auto &dir : BaseDir::getFontsPaths() ) { std::cout << dir << std::endl; }
     std::cout << std::endl;
 
+    std::cout << "getColorProfilesPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getColorProfilesPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
     std::cout << "getCachePath: " << BaseDir::getCachePath() << std::endl;
     std::cout << "getConfigPath: " << BaseDir::getConfigPath() << std::endl;
     std::cout << "getDataPath: " << BaseDir::getDataPath() << std::endl;

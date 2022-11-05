@@ -38,17 +38,12 @@ const std::vector<std::string>
 DesktopKit::Core::BaseDir::getApplicationsPaths()
 {
     std::vector<std::string> paths;
-
-    QString appdir = QString("%1/Applications").arg( QDir::homePath() );
-    paths.push_back( appdir.toStdString() );
-
+    paths.push_back( QString("%1/Applications").arg( QDir::homePath() ).toStdString() );
     QStringList locations = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
     for (int i = 0; i < locations.size(); ++i) { paths.push_back( locations.at(i).toStdString() );}
-
     QStringList bins = QString::fromStdString( Common::getEnv("PATH") ).split(":",
                                                                               Qt::SkipEmptyParts);
     for (int i = 0; i < bins.size(); ++i) { paths.push_back( bins.at(i).toStdString() );}
-
     return paths;
 }
 
@@ -68,6 +63,12 @@ const std::vector<std::string>
 DesktopKit::Core::BaseDir::getColorProfilesPaths()
 {
     std::vector<std::string> paths;
+    paths.push_back( QString("%1/.icc").arg( QDir::homePath() ).toStdString() );
+    paths.push_back( QString("%1/.color/icc").arg( QDir::homePath() ).toStdString() );
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/color/icc").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
     return paths;
 }
 
