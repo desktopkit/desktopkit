@@ -42,7 +42,7 @@ add_compile_options(-Wall -Wextra)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED common.cpp basedir.cpp core.h)
+add_library(${PROJECT_NAME} SHARED common.cpp basedir.cpp mimes.cpp core.h)
 add_executable(core-test main.cpp)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})

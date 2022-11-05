@@ -41,8 +41,17 @@ make DESTDIR=<package> install
 
 ## Kits
 
+### Core
+
+Library that provide core functions.
+
+* `DesktopKit::Core::Common` - provides common functions
+* `DesktopKit::Core::BaseDir` - provides paths for standarized directories
+* `DesktopKit::Core::Mimes` - provides mime functions
+
+## TODO
+
 * org.DesktopKit.App (https://github.com/desktopkit/desktopkit/issues/3)
-* org.DesktopKit.Core (https://github.com/desktopkit/desktopkit/issues/2)
 * org.DesktopKit.Disks (https://github.com/desktopkit/desktopkit/issues/5)
 * org.DesktopKit.Files (https://github.com/desktopkit/desktopkit/issues/9)
 * org.DesktopKit.Media (https://github.com/desktopkit/desktopkit/issues/7)

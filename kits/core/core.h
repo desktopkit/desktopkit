@@ -81,6 +81,11 @@ namespace DesktopKit
                                               const std::string &suffix = std::string(),
                                               const std::string &fallback = std::string() );
         };
+        class Mimes
+        {
+        public:
+            static const std::string getType(const std::string &filename);
+        };
     }
 }
 
