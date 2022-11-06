@@ -28,14 +28,19 @@ make DESTDIR=<package> install
 ```
 └── usr
     ├── include
-    │   └── DesktopKit
-    │       └── core.h
+    │   └── DesktopKit
+    │       ├── app.h
+    │       └── core.h
     ├── lib64
-    │   ├── libDesktopKit.Core.so -> libDesktopKit.Core.so.1
-    │   ├── libDesktopKit.Core.so.1 -> libDesktopKit.Core.so.1.0.0
-    │   ├── libDesktopKit.Core.so.1.0.0
-    │   └── pkgconfig
-    │       └── DesktopKit.Core.pc
+    │   ├── libDesktopKit.App.so -> libDesktopKit.App.so.1
+    │   ├── libDesktopKit.App.so.1 -> libDesktopKit.App.so.1.0.0
+    │   ├── libDesktopKit.App.so.1.0.0
+    │   ├── libDesktopKit.Core.so -> libDesktopKit.Core.so.1
+    │   ├── libDesktopKit.Core.so.1 -> libDesktopKit.Core.so.1.0.0
+    │   ├── libDesktopKit.Core.so.1.0.0
+    │   └── pkgconfig
+    │       ├── DesktopKit.App.pc
+    │       └── DesktopKit.Core.pc
     └── share
         └── doc
             └── DesktopKit-1.0.0
