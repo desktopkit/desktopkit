@@ -55,7 +55,7 @@ namespace DesktopKit
             static const std::vector<std::string> getFontsPaths();
             static const std::vector<std::string> getIconsPaths();
             static const std::vector<std::string> getMimeGenericPaths();
-            static const std::vector<std::string> getMimeGlobPaths();
+            static const std::vector<std::string> getMimeGlobsPaths();
             static const std::vector<std::string> getMimeTypePaths();
             static const std::string getMusicPath();
             static const std::string getPicturesPath();
@@ -64,6 +64,7 @@ namespace DesktopKit
             static const std::string getThumbnailsPath();
             static const std::string getTrashPath();
             static const std::string getVideosPath();
+            static bool isAppDir(const std::string &filename);
         private:
             enum BaseDirPath {
                 pathCache,

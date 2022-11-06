@@ -124,6 +124,10 @@ const std::vector<std::string>
 DesktopKit::Core::BaseDir::getIconsPaths()
 {
     std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/icons").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
     return paths;
 }
 
@@ -131,13 +135,21 @@ const std::vector<std::string>
 DesktopKit::Core::BaseDir::getMimeGenericPaths()
 {
     std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/mime/generic-icons").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
     return paths;
 }
 
 const std::vector<std::string>
-DesktopKit::Core::BaseDir::getMimeGlobPaths()
+DesktopKit::Core::BaseDir::getMimeGlobsPaths()
 {
     std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/mime/globs").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
     return paths;
 }
 
@@ -145,6 +157,10 @@ const std::vector<std::string>
 DesktopKit::Core::BaseDir::getMimeTypePaths()
 {
     std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/mime/types").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
     return paths;
 }
 
@@ -164,6 +180,10 @@ const std::vector<std::string>
 DesktopKit::Core::BaseDir::getPixmapsPaths()
 {
     std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/pixmaps").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
     return paths;
 }
 
@@ -191,6 +211,12 @@ const std::string
 DesktopKit::Core::BaseDir::getVideosPath()
 {
     return getPath(BaseDirPath::pathVideos, "", "Videos");
+}
+
+bool
+DesktopKit::Core::BaseDir::isAppDir(const std::string &filename)
+{
+    return QFile::exists( QString("%1/AppRun").arg( QString::fromStdString(filename) ) );
 }
 
 const std::string

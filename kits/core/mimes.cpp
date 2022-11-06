@@ -35,12 +35,9 @@ const std::string
 DesktopKit::Core::Mimes::getType(const std::string &filename)
 {
     QFileInfo info( QString::fromStdString(filename) );
-    bool isApp = false;
-    if ( info.isDir() ) {
-        QString apprun = QString("%1/AppRun").arg( QString::fromStdString(filename) );
-        if ( QFile::exists(apprun) ||
-             info.suffix() == QString::fromUtf8("app") ) { isApp = true; }
-    } else if ( info.suffix() == QString::fromUtf8("AppImage") ) { isApp = true; }
-    if (isApp) { return QString::fromUtf8("application/x-executable").toStdString(); }
+    if ( BaseDir::isAppDir(filename) ||
+         info.suffix() == QString::fromUtf8("app") ||
+         info.suffix() == QString::fromUtf8("AppImage"))
+    { return QString::fromUtf8("application/x-executable").toStdString(); }
     return QMimeDatabase().mimeTypeForFile( QString::fromStdString(filename) ).name().toStdString();
 }

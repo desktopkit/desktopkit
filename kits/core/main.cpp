@@ -47,6 +47,26 @@ int main()
     for ( auto &dir : BaseDir::getColorProfilesPaths() ) { std::cout << dir << std::endl; }
     std::cout << std::endl;
 
+    std::cout << "BaseDir::getIconsPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getIconsPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "BaseDir::getPixmapsPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getPixmapsPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "BaseDir::getMimeGenericPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getMimeGenericPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "BaseDir::getMimeGlobsPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getMimeGlobsPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "BaseDir::getMimeTypePaths:" << std::endl;
+    for ( auto &dir : BaseDir::getMimeTypePaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
     std::cout << "BaseDir::getCachePath: " << BaseDir::getCachePath() << std::endl;
     std::cout << "BaseDir::getConfigPath: " << BaseDir::getConfigPath() << std::endl;
     std::cout << "BaseDir::getDataPath: " << BaseDir::getDataPath() << std::endl;
