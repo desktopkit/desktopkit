@@ -79,7 +79,12 @@ int main()
     std::cout << "BaseDir::getThumbnailsPath: " << BaseDir::getThumbnailsPath() << std::endl;
     std::cout << "BaseDir::getTrashPath: " << BaseDir::getTrashPath() << std::endl;
     std::cout << "BaseDir::getVideosPath: " << BaseDir::getVideosPath() << std::endl;
-    std::cout << "Mimes::getType for core-test: " << Mimes::getType("core-test") << std::endl;
+    std::cout << "Mime::getType: " << Mime::getType("core-test") << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Mime::getGeneric:" << std::endl;
+    for ( auto &mime : Mime::getGeneric() ) { std::cout << mime.type << " : " << mime.icon << std::endl; }
+    std::cout << std::endl;
 
     return 0;
 }

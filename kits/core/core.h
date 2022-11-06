@@ -36,6 +36,8 @@ namespace DesktopKit
         class Common
         {
         public:
+            static bool findStringInVector(const std::vector<std::string> &haystack,
+                                           const std::string &needle);
             static const std::string getEnv(const std::string &key);
             static bool setEnv(const std::string &key,
                                const std::string &value);
@@ -82,10 +84,27 @@ namespace DesktopKit
                                               const std::string &suffix = std::string(),
                                               const std::string &fallback = std::string() );
         };
-        class Mimes
+        class Cache
         {
         public:
+        };
+        class Mime
+        {
+        public:
+            struct Icon {
+                std::string type;
+                std::string icon;
+            };
+            struct Suffix {
+                std::string type;
+                std::string suffix;
+            };
             static const std::string getType(const std::string &filename);
+            static const std::vector<DesktopKit::Core::Mime::Icon> getGeneric();
+            static const std::vector<DesktopKit::Core::Mime::Suffix> getGlobs();
+        private:
+            static const std::vector<DesktopKit::Core::Mime::Icon> getMimeIconsFromFile(const std::string &filename);
+            static const std::vector<DesktopKit::Core::Mime::Suffix> getMimeSuffixFromFile(const std::string &filename);
         };
     }
 }

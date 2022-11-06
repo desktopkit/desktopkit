@@ -18,3 +18,5 @@ jobs:
         make
         make DESTDIR=`pwd`/package install
         tree package
+        ./kits/core/core-test
+
