@@ -10,7 +10,11 @@ Various libraries, services and utilities for (Qt/C++) desktop applications.
 
 ### Core
 
-* Qt v5+ Core
+* Qt Core
+
+### App
+
+* Qt Gui
 
 ## Build
 
@@ -49,9 +53,15 @@ Library that provide core functions.
 * `DesktopKit::Core::BaseDir` - provides paths for standarized directories
 * `DesktopKit::Core::Mimes` - provides mime functions
 
+### App
+
+Application support library.
+
+* `DesktopKit::App::Desktop` - provides desktop related functions
+* `DesktopKit::App::Theme` - provides theme related functions
+
 ## TODO
 
-* org.DesktopKit.App (https://github.com/desktopkit/desktopkit/issues/3)
 * org.DesktopKit.Disks (https://github.com/desktopkit/desktopkit/issues/5)
 * org.DesktopKit.Files (https://github.com/desktopkit/desktopkit/issues/9)
 * org.DesktopKit.Media (https://github.com/desktopkit/desktopkit/issues/7)

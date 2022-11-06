@@ -1,3 +1,4 @@
+/*
 #
 # DesktopKit
 # <https://desktopkit.org>
@@ -20,15 +21,15 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #
+*/
 
-cmake_minimum_required(VERSION 3.5)
+#include "app.h"
 
-project(DesktopKit VERSION 1.0.0)
+#include <iostream>
 
-include(GNUInstallDirs)
+using namespace DesktopKit::App;
 
-add_subdirectory(kits/core)
-add_subdirectory(kits/app)
-
-install(FILES README.md LICENSE
-        DESTINATION ${CMAKE_INSTALL_DOCDIR}-${PROJECT_VERSION})
+int main()
+{
+    return 0;
+}
