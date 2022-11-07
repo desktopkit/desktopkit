@@ -158,8 +158,10 @@ DesktopKit::Core::BaseDir::getMimeGlobsPaths()
 {
     std::vector<std::string> paths;
     for ( auto &dir : getDataPaths() ) {
-        QString path = QString("%1/mime/globs").arg( QString::fromStdString(dir) );
-        paths.push_back( path.toStdString() );
+        QString path1 = QString("%1/mime/globs2").arg( QString::fromStdString(dir) );
+        QString path2 = QString("%1/mime/globs").arg( QString::fromStdString(dir) );
+        paths.push_back( path1.toStdString() );
+        paths.push_back( path2.toStdString() );
     }
     return paths;
 }

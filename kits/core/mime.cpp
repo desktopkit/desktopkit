@@ -81,6 +81,12 @@ const std::vector<DesktopKit::Core::Mime::IconItem>
 DesktopKit::Core::Mime::getGlobs()
 {
     std::vector<DesktopKit::Core::Mime::IconItem> result;
+    for ( auto &file : DesktopKit::Core::BaseDir::getMimeGlobsPaths() ) {
+        for ( auto &mime : getMimeIconsFromFile(file) ) {
+            if ( containsIconItem(result, mime.key) ) { continue; }
+            result.push_back(mime);
+        }
+    }
     return result;
 }
 
@@ -93,14 +99,17 @@ DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename)
     QTextStream s(&file);
     while ( !s.atEnd() ) {
         QStringList line = s.readLine().split(":", QT_SKIP_EMPTY);
-        if (line.count() != 2) { continue; }
-        QString mimeName = line.at(0);
-        mimeName.replace("/", "-");
-        QString mimeIcon = line.at(1);
-        if ( !mimeName.isEmpty() && !mimeIcon.isEmpty() ) {
+        if (line.count() != 2 && line.count() != 3) { continue; }
+        int keyIndex = line.count() == 3 ? 1 : 0;
+        int valueIndex = line.count() == 3 ? 2 : 1;
+        QString key = line.at(keyIndex).trimmed();
+        key.replace("/", "-");
+        QString value = line.at(valueIndex).trimmed();
+        if (value == "__NOGLOBS__") { continue; }
+        if ( !key.isEmpty() || !value.isEmpty() ) {
             DesktopKit::Core::Mime::IconItem mime;
-            mime.key = mimeName.toStdString();
-            mime.value = mimeIcon.toStdString();
+            mime.key = key.toStdString();
+            mime.value = value.toStdString();
             result.push_back(mime);
         }
     }

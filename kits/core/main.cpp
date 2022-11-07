@@ -86,5 +86,13 @@ int main()
     for ( auto &mime : Mime::getGenericIcons() ) { std::cout << mime.key << " : " << mime.value << std::endl; }
     std::cout << std::endl;
 
+    std::cout << "Mime::getIcons:" << std::endl;
+    for ( auto &mime : Mime::getIcons() ) { std::cout << mime.key << " : " << mime.value << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "Mime::getGlobs:" << std::endl;
+    for ( auto &mime : Mime::getGlobs() ) { std::cout << mime.key << " : " << mime.value << std::endl; }
+    std::cout << std::endl;
+
     return 0;
 }
