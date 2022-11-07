@@ -188,6 +188,17 @@ DesktopKit::Core::BaseDir::getMimeAliasPaths()
     return paths;
 }
 
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getMimeAppsInfoPaths()
+{
+    std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/applications/mimeinfo.cache").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
+    return paths;
+}
+
 const std::string
 DesktopKit::Core::BaseDir::getMusicPath()
 {

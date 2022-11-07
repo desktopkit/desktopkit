@@ -98,5 +98,16 @@ int main()
     for ( auto &mime : Mime::getGlobs() ) { std::cout << mime.key << " : " << mime.value << std::endl; }
     std::cout << std::endl;
 
+    std::cout << "Mime::getAlias:" << std::endl;
+    for ( auto &mime : Mime::getAlias() ) { std::cout << mime.key << " : " << mime.value << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "Mime::getAppsInfo:" << std::endl;
+    for ( auto &mime : Mime::getAppsInfo() ) {
+        std::cout << mime.key << " : " << std::endl;
+        for (auto &app : mime.apps) { std::cout << "   - " << app << std::endl; }
+    }
+    std::cout << std::endl;
+
     return 0;
 }

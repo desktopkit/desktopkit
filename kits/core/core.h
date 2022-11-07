@@ -59,6 +59,7 @@ namespace DesktopKit
             static const std::vector<std::string> getMimeGlobsPaths();
             static const std::vector<std::string> getMimeTypePaths();
             static const std::vector<std::string> getMimeAliasPaths();
+            static const std::vector<std::string> getMimeAppsInfoPaths();
             static const std::string getMusicPath();
             static const std::string getPicturesPath();
             static const std::vector<std::string> getPixmapsPaths();
@@ -95,16 +96,26 @@ namespace DesktopKit
                 std::string key;
                 std::string value;
             };
+            struct AppItem {
+                std::string key;
+                std::vector<std::string> apps;
+            };
             static const std::string getType(const std::string &filename);
             static const std::vector<DesktopKit::Core::Mime::IconItem> getIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGenericIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGlobs();
+            static const std::vector<DesktopKit::Core::Mime::IconItem> getAlias();
+            static const std::vector<DesktopKit::Core::Mime::AppItem> getAppsInfo();
         private:
             static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile( const std::string &filename,
                                                                                              const std::string &splitter = std::string(":") );
             static bool containsIconItem(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
                                          const std::string &search,
                                          bool searchInKey = true);
+            static bool containsAppItem(const std::vector<DesktopKit::Core::Mime::AppItem> &items,
+                                        const std::string &search);
+            static const std::string getValueFromIconItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
+                                                           const std::string &key);
         };
     }
 }

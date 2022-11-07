@@ -90,6 +90,36 @@ DesktopKit::Core::Mime::getGlobs()
 }
 
 const std::vector<DesktopKit::Core::Mime::IconItem>
+DesktopKit::Core::Mime::getAlias()
+{
+    std::vector<DesktopKit::Core::Mime::IconItem> result;
+    for ( auto &file : DesktopKit::Core::BaseDir::getMimeAliasPaths() ) {
+        for ( auto &mime : getMimeIconsFromFile(file, " ") ) {
+            if ( containsIconItem(result, mime.key) ) { continue; }
+            result.push_back(mime);
+        }
+    }
+    return result;
+}
+
+const std::vector<DesktopKit::Core::Mime::AppItem>
+DesktopKit::Core::Mime::getAppsInfo()
+{
+    std::vector<DesktopKit::Core::Mime::AppItem> result;
+    for ( auto &file : DesktopKit::Core::BaseDir::getMimeAppsInfoPaths() ) {
+        for ( auto &mime : getMimeIconsFromFile(file, "=") ) {
+            if ( containsAppItem(result, mime.key) ) { continue; }
+            DesktopKit::Core::Mime::AppItem item;
+            item.key = mime.key;
+            QStringList apps = QString::fromStdString(mime.value).split(";", QT_SKIP_EMPTY);
+            for (auto &app : apps) { item.apps.push_back( app.toStdString() ); }
+            result.push_back(item);
+        }
+    }
+    return result;
+}
+
+const std::vector<DesktopKit::Core::Mime::IconItem>
 DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename,
                                              const std::string &splitter)
 {
@@ -118,7 +148,7 @@ DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename,
 }
 
 bool
-DesktopKit::Core::Mime::containsIconItem(const std::vector<IconItem> &items,
+DesktopKit::Core::Mime::containsIconItem(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
                                          const std::string &search,
                                          bool searchInKey)
 {
@@ -127,4 +157,24 @@ DesktopKit::Core::Mime::containsIconItem(const std::vector<IconItem> &items,
         else if (!searchInKey && item.value == search) { return true; }
     }
     return false;
+}
+
+bool
+DesktopKit::Core::Mime::containsAppItem(const std::vector<DesktopKit::Core::Mime::AppItem> &items,
+                                        const std::string &search)
+{
+    for (auto &item : items) {
+        if (item.key == search) { return true; }
+    }
+    return false;
+}
+
+const std::string
+DesktopKit::Core::Mime::getValueFromIconItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
+                                              const std::string &key)
+{
+    for (auto &item : items) {
+        if (item.key == key) { return item.value; }
+    }
+    return std::string();
 }
