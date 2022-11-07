@@ -45,8 +45,7 @@ DesktopKit::Core::Mime::getType(const std::string &filename)
 {
     QFileInfo info( QString::fromStdString(filename) );
     if ( DesktopKit::Core::BaseDir::isAppDir(filename) ||
-         ( info.suffix() == QString::fromUtf8("app") && info.isDir() ) ||
-         ( info.suffix() == QString::fromUtf8("AppImage") && info.isExecutable() ) )
+         ( info.suffix() == QString::fromUtf8("app") && info.isDir() ) )
     { return QString::fromUtf8("application/x-executable").toStdString(); }
     return QMimeDatabase().mimeTypeForFile( QString::fromStdString(filename) ).name().toStdString();
 }
