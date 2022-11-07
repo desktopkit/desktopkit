@@ -109,5 +109,14 @@ int main()
     }
     std::cout << std::endl;
 
+    std::cout << "Mime::getItems:" << std::endl;
+    for ( auto &mime : Mime::getItems() ) {
+        std::cout << mime.type << " : " << mime.icon << std::endl;
+        for (auto &alias : mime.alias) { std::cout << "   - alias: " << alias << std::endl; }
+        for (auto &app : mime.apps) { std::cout << "   - app: " << app << std::endl; }
+        for (auto &file : mime.files) { std::cout << "   - file: " << file << std::endl; }
+    }
+    std::cout << std::endl;
+
     return 0;
 }

@@ -100,7 +100,15 @@ namespace DesktopKit
                 std::string key;
                 std::vector<std::string> apps;
             };
+            struct MimeItem {
+                std::string type;
+                std::string icon;
+                std::vector<std::string> alias;
+                std::vector<std::string> apps;
+                std::vector<std::string> files;
+            };
             static const std::string getType(const std::string &filename);
+            static const std::vector<DesktopKit::Core::Mime::MimeItem> getItems();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGenericIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGlobs();
@@ -109,13 +117,19 @@ namespace DesktopKit
         private:
             static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile( const std::string &filename,
                                                                                              const std::string &splitter = std::string(":") );
+            static bool containsInStrings(const std::vector<std::string> &items,
+                                          const std::string &search);
             static bool containsIconItem(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
                                          const std::string &search,
                                          bool searchInKey = true);
             static bool containsAppItem(const std::vector<DesktopKit::Core::Mime::AppItem> &items,
                                         const std::string &search);
+            static bool containsMimeItem(const std::vector<DesktopKit::Core::Mime::MimeItem> &items,
+                                         const std::string &search);
             static const std::string getValueFromIconItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
                                                            const std::string &key);
+            static const std::string getKeyFromIconItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
+                                                         const std::string &value);
         };
     }
 }
