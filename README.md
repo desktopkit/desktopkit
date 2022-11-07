@@ -1,20 +1,20 @@
 # DesktopKit *(draft)*
 
-Unix Desktop Framework Kit.
+Unix Desktop Support Kit.
 
 Various libraries, services and utilities for (Qt/C++) desktop applications.
-
-**Currently in draft mode**
 
 ## Requirements
 
 ### Core
 
-* Qt Core
+* shared-mime-info
+* desktop-file-utils
+* qtbase core
 
 ### App
 
-* Qt Gui
+* qtbase gui
 
 ## Build
 

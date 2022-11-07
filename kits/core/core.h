@@ -58,6 +58,7 @@ namespace DesktopKit
             static const std::vector<std::string> getMimeGenericIconsPaths();
             static const std::vector<std::string> getMimeGlobsPaths();
             static const std::vector<std::string> getMimeTypePaths();
+            static const std::vector<std::string> getMimeAliasPaths();
             static const std::string getMusicPath();
             static const std::string getPicturesPath();
             static const std::vector<std::string> getPixmapsPaths();
@@ -99,7 +100,8 @@ namespace DesktopKit
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGenericIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGlobs();
         private:
-            static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile(const std::string &filename);
+            static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile( const std::string &filename,
+                                                                                             const std::string &splitter = std::string(":") );
             static bool containsIconItem(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
                                          const std::string &search,
                                          bool searchInKey = true);

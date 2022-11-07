@@ -177,6 +177,17 @@ DesktopKit::Core::BaseDir::getMimeTypePaths()
     return paths;
 }
 
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getMimeAliasPaths()
+{
+    std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/mime/aliases").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
+    return paths;
+}
+
 const std::string
 DesktopKit::Core::BaseDir::getMusicPath()
 {

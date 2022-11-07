@@ -67,6 +67,10 @@ int main()
     for ( auto &dir : BaseDir::getMimeTypePaths() ) { std::cout << dir << std::endl; }
     std::cout << std::endl;
 
+    std::cout << "BaseDir::getMimeAliasPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getMimeAliasPaths() ) { std::cout << dir << std::endl; }
+    std::cout << std::endl;
+
     std::cout << "BaseDir::getCachePath: " << BaseDir::getCachePath() << std::endl;
     std::cout << "BaseDir::getConfigPath: " << BaseDir::getConfigPath() << std::endl;
     std::cout << "BaseDir::getDataPath: " << BaseDir::getDataPath() << std::endl;

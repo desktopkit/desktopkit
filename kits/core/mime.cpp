@@ -90,14 +90,15 @@ DesktopKit::Core::Mime::getGlobs()
 }
 
 const std::vector<DesktopKit::Core::Mime::IconItem>
-DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename)
+DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename,
+                                             const std::string &splitter)
 {
     std::vector<DesktopKit::Core::Mime::IconItem> result;
     QFile file( QString::fromStdString(filename) );
     if ( !file.open(QIODevice::ReadOnly|QIODevice::Text) ) { return result; }
     QTextStream s(&file);
     while ( !s.atEnd() ) {
-        QStringList line = s.readLine().split(":", QT_SKIP_EMPTY);
+        QStringList line = s.readLine().split(QString::fromStdString(splitter), QT_SKIP_EMPTY);
         if (line.count() != 2 && line.count() != 3) { continue; }
         int keyIndex = line.count() == 3 ? 1 : 0;
         int valueIndex = line.count() == 3 ? 2 : 1;
