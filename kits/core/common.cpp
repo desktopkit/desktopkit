@@ -28,20 +28,6 @@
 #include <QString>
 #include <QDebug>
 
-bool
-DesktopKit::Core::Common::findStringInVector(const std::vector<std::string> &haystack,
-                                             const std::string &needle)
-{
-    if ( std::find(haystack.begin(),
-                   haystack.end(),
-                   needle) != haystack.end() )
-    {
-        qDebug() << "found" << QString::fromStdString(needle);
-        return true;
-    }
-    return false;
-}
-
 const std::string
 DesktopKit::Core::Common::getEnv(const std::string &key)
 {

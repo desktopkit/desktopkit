@@ -132,7 +132,18 @@ DesktopKit::Core::BaseDir::getIconsPaths()
 }
 
 const std::vector<std::string>
-DesktopKit::Core::BaseDir::getMimeGenericPaths()
+DesktopKit::Core::BaseDir::getMimeIconsPaths()
+{
+    std::vector<std::string> paths;
+    for ( auto &dir : getDataPaths() ) {
+        QString path = QString("%1/mime/icons").arg( QString::fromStdString(dir) );
+        paths.push_back( path.toStdString() );
+    }
+    return paths;
+}
+
+const std::vector<std::string>
+DesktopKit::Core::BaseDir::getMimeGenericIconsPaths()
 {
     std::vector<std::string> paths;
     for ( auto &dir : getDataPaths() ) {

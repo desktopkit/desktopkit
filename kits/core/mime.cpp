@@ -45,41 +45,49 @@ DesktopKit::Core::Mime::getType(const std::string &filename)
 {
     QFileInfo info( QString::fromStdString(filename) );
     if ( DesktopKit::Core::BaseDir::isAppDir(filename) ||
-         info.suffix() == QString::fromUtf8("app") ||
-         info.suffix() == QString::fromUtf8("AppImage"))
+         ( info.suffix() == QString::fromUtf8("app") && info.isDir() ) ||
+         ( info.suffix() == QString::fromUtf8("AppImage") && info.isExecutable() ) )
     { return QString::fromUtf8("application/x-executable").toStdString(); }
     return QMimeDatabase().mimeTypeForFile( QString::fromStdString(filename) ).name().toStdString();
 }
 
-const std::vector<DesktopKit::Core::Mime::Icon>
-DesktopKit::Core::Mime::getGeneric()
+const std::vector<DesktopKit::Core::Mime::IconItem>
+DesktopKit::Core::Mime::getIcons()
 {
-    std::vector<std::string> types;
-    std::vector<DesktopKit::Core::Mime::Icon> result;
-    for ( auto &file : DesktopKit::Core::BaseDir::getMimeGenericPaths() ) {
-        //qDebug() << "read mime generic" << QString::fromStdString(file);
+    std::vector<DesktopKit::Core::Mime::IconItem> result;
+    for ( auto &file : DesktopKit::Core::BaseDir::getMimeIconsPaths() ) {
         for ( auto &mime : getMimeIconsFromFile(file) ) {
-            if ( DesktopKit::Core::Common::findStringInVector(types,
-                                                              mime.type) ) { continue; }
-            //qDebug() << "adding mime generic" << QString::fromStdString(mime.type) << QString::fromStdString(mime.icon);
-            types.push_back(mime.type);
+            if ( containsIconItem(result, mime.key) ) { continue; }
             result.push_back(mime);
         }
     }
     return result;
 }
 
-const std::vector<DesktopKit::Core::Mime::Suffix>
-DesktopKit::Core::Mime::getGlobs()
+const std::vector<DesktopKit::Core::Mime::IconItem>
+DesktopKit::Core::Mime::getGenericIcons()
 {
-    std::vector<DesktopKit::Core::Mime::Suffix> result;
+    std::vector<DesktopKit::Core::Mime::IconItem> result;
+    for ( auto &file : DesktopKit::Core::BaseDir::getMimeGenericIconsPaths() ) {
+        for ( auto &mime : getMimeIconsFromFile(file) ) {
+            if ( containsIconItem(result, mime.key) ) { continue; }
+            result.push_back(mime);
+        }
+    }
     return result;
 }
 
-const std::vector<DesktopKit::Core::Mime::Icon>
+const std::vector<DesktopKit::Core::Mime::IconItem>
+DesktopKit::Core::Mime::getGlobs()
+{
+    std::vector<DesktopKit::Core::Mime::IconItem> result;
+    return result;
+}
+
+const std::vector<DesktopKit::Core::Mime::IconItem>
 DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename)
 {
-    std::vector<DesktopKit::Core::Mime::Icon> result;
+    std::vector<DesktopKit::Core::Mime::IconItem> result;
     QFile file( QString::fromStdString(filename) );
     if ( !file.open(QIODevice::ReadOnly|QIODevice::Text) ) { return result; }
     QTextStream s(&file);
@@ -90,9 +98,9 @@ DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename)
         mimeName.replace("/", "-");
         QString mimeIcon = line.at(1);
         if ( !mimeName.isEmpty() && !mimeIcon.isEmpty() ) {
-            DesktopKit::Core::Mime::Icon mime;
-            mime.type = mimeName.toStdString();
-            mime.icon = mimeIcon.toStdString();
+            DesktopKit::Core::Mime::IconItem mime;
+            mime.key = mimeName.toStdString();
+            mime.value = mimeIcon.toStdString();
             result.push_back(mime);
         }
     }
@@ -100,10 +108,14 @@ DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename)
     return result;
 }
 
-const std::vector<DesktopKit::Core::Mime::Suffix>
-DesktopKit::Core::Mime::getMimeSuffixFromFile(const std::string &filename)
+bool
+DesktopKit::Core::Mime::containsIconItem(const std::vector<IconItem> &items,
+                                         const std::string &search,
+                                         bool searchInKey)
 {
-    std::vector<DesktopKit::Core::Mime::Suffix> result;
-    if ( !QFile::exists( QString::fromStdString(filename) ) ) { return result; }
-    return result;
+    for (auto &item : items) {
+        if (searchInKey && item.key == search) { return true; }
+        else if (!searchInKey && item.value == search) { return true; }
+    }
+    return false;
 }

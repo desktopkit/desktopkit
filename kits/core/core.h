@@ -36,8 +36,6 @@ namespace DesktopKit
         class Common
         {
         public:
-            static bool findStringInVector(const std::vector<std::string> &haystack,
-                                           const std::string &needle);
             static const std::string getEnv(const std::string &key);
             static bool setEnv(const std::string &key,
                                const std::string &value);
@@ -56,7 +54,8 @@ namespace DesktopKit
             static const std::string getDownloadPath();
             static const std::vector<std::string> getFontsPaths();
             static const std::vector<std::string> getIconsPaths();
-            static const std::vector<std::string> getMimeGenericPaths();
+            static const std::vector<std::string> getMimeIconsPaths();
+            static const std::vector<std::string> getMimeGenericIconsPaths();
             static const std::vector<std::string> getMimeGlobsPaths();
             static const std::vector<std::string> getMimeTypePaths();
             static const std::string getMusicPath();
@@ -91,20 +90,19 @@ namespace DesktopKit
         class Mime
         {
         public:
-            struct Icon {
-                std::string type;
-                std::string icon;
-            };
-            struct Suffix {
-                std::string type;
-                std::string suffix;
+            struct IconItem {
+                std::string key;
+                std::string value;
             };
             static const std::string getType(const std::string &filename);
-            static const std::vector<DesktopKit::Core::Mime::Icon> getGeneric();
-            static const std::vector<DesktopKit::Core::Mime::Suffix> getGlobs();
+            static const std::vector<DesktopKit::Core::Mime::IconItem> getIcons();
+            static const std::vector<DesktopKit::Core::Mime::IconItem> getGenericIcons();
+            static const std::vector<DesktopKit::Core::Mime::IconItem> getGlobs();
         private:
-            static const std::vector<DesktopKit::Core::Mime::Icon> getMimeIconsFromFile(const std::string &filename);
-            static const std::vector<DesktopKit::Core::Mime::Suffix> getMimeSuffixFromFile(const std::string &filename);
+            static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile(const std::string &filename);
+            static bool containsIconItem(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
+                                         const std::string &search,
+                                         bool searchInKey = true);
         };
     }
 }

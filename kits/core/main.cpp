@@ -55,8 +55,8 @@ int main()
     for ( auto &dir : BaseDir::getPixmapsPaths() ) { std::cout << dir << std::endl; }
     std::cout << std::endl;
 
-    std::cout << "BaseDir::getMimeGenericPaths:" << std::endl;
-    for ( auto &dir : BaseDir::getMimeGenericPaths() ) { std::cout << dir << std::endl; }
+    std::cout << "BaseDir::getMimeGenericIconsPaths:" << std::endl;
+    for ( auto &dir : BaseDir::getMimeGenericIconsPaths() ) { std::cout << dir << std::endl; }
     std::cout << std::endl;
 
     std::cout << "BaseDir::getMimeGlobsPaths:" << std::endl;
@@ -82,8 +82,8 @@ int main()
     std::cout << "Mime::getType: " << Mime::getType("core-test") << std::endl;
     std::cout << std::endl;
 
-    std::cout << "Mime::getGeneric:" << std::endl;
-    for ( auto &mime : Mime::getGeneric() ) { std::cout << mime.type << " : " << mime.icon << std::endl; }
+    std::cout << "Mime::getGenericIcons:" << std::endl;
+    for ( auto &mime : Mime::getGenericIcons() ) { std::cout << mime.key << " : " << mime.value << std::endl; }
     std::cout << std::endl;
 
     return 0;
