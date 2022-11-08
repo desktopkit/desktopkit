@@ -137,6 +137,34 @@ DesktopKit::Core::Mime::getAppsInfo()
     return result;
 }
 
+const std::vector<std::string>
+DesktopKit::Core::Mime::getAppsForMime(const std::string &mime)
+{
+    std::vector<std::string> result;
+    for ( auto &item : getAppsInfo() ) {
+        if (item.key == mime) {
+            for (auto &app : item.apps) {
+                if ( containsInStrings(result, app) ) { continue; }
+                result.push_back(app);
+            }
+            break;
+        }
+    }
+    return result;
+}
+
+const std::string
+DesktopKit::Core::Mime::getIconForMime(const std::string &mime)
+{
+    std::string icon;
+    icon = getValueFromIconItems(getIcons(), mime);
+    if ( icon.empty() ) { icon = getValueFromIconItems(getGenericIcons(), mime); }
+    if ( icon.empty() ) {
+        // should probably check if it's an alias before giving up?
+    }
+    return icon;
+}
+
 const std::vector<DesktopKit::Core::Mime::IconItem>
 DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename,
                                              const std::string &splitter)

@@ -1,2 +1,4 @@
 
 *.user
+kits/app/app.cpp
+kits/core/core.cpp

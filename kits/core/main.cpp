@@ -118,5 +118,12 @@ int main()
     }
     std::cout << std::endl;
 
+    std::cout << "Mime::getAppsForMime:" << std::endl << std::endl;
+    for ( auto &app : Mime::getAppsForMime("application/x-xz-compressed-tar") ) { std::cout << app << std::endl; }
+    std::cout << std::endl;
+
+    std::cout << "Mime::getIconForMime: " << Mime::getIconForMime("application/x-xz-compressed-tar") << std::endl;
+    std::cout << std::endl;
+
     return 0;
 }
