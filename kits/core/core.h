@@ -108,7 +108,9 @@ namespace DesktopKit
                 std::vector<std::string> files;
             };
             static const std::string getType(const std::string &filename);
-            static const std::vector<DesktopKit::Core::Mime::MimeItem> getItems();
+            static const std::vector<DesktopKit::Core::Mime::MimeItem> getItems(bool incAlias = true,
+                                                                                bool incGlobs = true,
+                                                                                bool incApps = true);
             static const std::vector<DesktopKit::Core::Mime::IconItem> getIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGenericIcons();
             static const std::vector<DesktopKit::Core::Mime::IconItem> getGlobs();
@@ -130,6 +132,10 @@ namespace DesktopKit
                                                            const std::string &key);
             static const std::string getKeyFromIconItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
                                                          const std::string &value);
+            static const std::vector<DesktopKit::Core::Mime::MimeItem> findMimeItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
+                                                                                     bool incAlias = true,
+                                                                                     bool incGlobs = true,
+                                                                                     bool incApps = true);
         };
     }
 }

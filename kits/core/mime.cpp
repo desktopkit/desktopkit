@@ -51,34 +51,20 @@ DesktopKit::Core::Mime::getType(const std::string &filename)
 }
 
 const std::vector<DesktopKit::Core::Mime::MimeItem>
-DesktopKit::Core::Mime::getItems()
+DesktopKit::Core::Mime::getItems(bool incAlias,
+                                 bool incGlobs,
+                                 bool incApps)
 {
     std::vector<DesktopKit::Core::Mime::MimeItem> result;
-    // TEST
-    for ( auto &item : /*getIcons()*/getGenericIcons() ) {
-        if ( containsMimeItem(result, item.key) ) { continue; }
-        DesktopKit::Core::Mime::MimeItem mime;
-        mime.type = item.key;
-        mime.icon = item.value;
-        for ( auto &alias : getAlias() ) {
-            if (alias.value == item.key) { mime.alias.push_back(alias.key); }
-        }
-        for ( auto &glob : getGlobs() ) {
-            if ( glob.key == item.key ||
-                 containsInStrings(mime.alias,
-                                   glob.key) ) { mime.files.push_back(glob.value); }
-        }
-        for ( auto &app : getAppsInfo() ) {
-            if ( app.key == item.key ||
-                 containsInStrings(mime.alias,
-                                   app.key) )
-            {
-                for (auto &desktop : app.apps) { mime.apps.push_back(desktop); }
-            }
-        }
-        result.push_back(mime);
-    }
 
+    for ( auto &item : findMimeItems(getIcons(), incAlias, incGlobs, incApps) ) {
+        if ( containsMimeItem(result, item.type) ) { continue; }
+        result.push_back(item);
+    }
+    for ( auto &item : findMimeItems(getGenericIcons(), incAlias, incGlobs, incApps) ) {
+        if ( containsMimeItem(result, item.type) ) { continue; }
+        result.push_back(item);
+    }
     return result;
 }
 
@@ -165,10 +151,9 @@ DesktopKit::Core::Mime::getMimeIconsFromFile(const std::string &filename,
         int keyIndex = line.count() == 3 ? 1 : 0;
         int valueIndex = line.count() == 3 ? 2 : 1;
         QString key = line.at(keyIndex).trimmed();
-        //key.replace("/", "-");
         QString value = line.at(valueIndex).trimmed();
         if (value == "__NOGLOBS__") { continue; }
-        if ( !key.isEmpty() || !value.isEmpty() ) {
+        if ( !key.isEmpty() && !value.isEmpty() ) {
             DesktopKit::Core::Mime::IconItem mime;
             mime.key = key.toStdString();
             mime.value = value.toStdString();
@@ -239,4 +224,44 @@ DesktopKit::Core::Mime::getKeyFromIconItems(const std::vector<DesktopKit::Core::
         if (item.value == value) { return item.key; }
     }
     return std::string();
+}
+
+const std::vector<DesktopKit::Core::Mime::MimeItem>
+DesktopKit::Core::Mime::findMimeItems(const std::vector<DesktopKit::Core::Mime::IconItem> &items,
+                                      bool incAlias,
+                                      bool incGlobs,
+                                      bool incApps)
+{
+    std::vector<DesktopKit::Core::Mime::MimeItem> result;
+    for (auto &item : items) {
+        if ( containsMimeItem(result, item.key) ) { continue; }
+        DesktopKit::Core::Mime::MimeItem mime;
+        mime.type = item.key;
+        mime.icon = item.value;
+        if ( mime.type.empty() || mime.icon.empty() ) { continue; }
+        if (incAlias) {
+            for ( auto &alias : getAlias() ) {
+                if (alias.value == item.key) { mime.alias.push_back(alias.key); }
+            }
+        }
+        if (incGlobs) {
+            for ( auto &glob : getGlobs() ) {
+                if ( glob.key == item.key ||
+                     containsInStrings(mime.alias,
+                                       glob.key) ) { mime.files.push_back(glob.value); }
+            }
+        }
+        if (incApps) {
+            for ( auto &app : getAppsInfo() ) {
+                if ( app.key == item.key ||
+                     containsInStrings(mime.alias,
+                                       app.key) )
+                {
+                    for (auto &desktop : app.apps) { mime.apps.push_back(desktop); }
+                }
+            }
+        }
+        result.push_back(mime);
+    }
+    return result;
 }
