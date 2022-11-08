@@ -33,6 +33,7 @@
 #include <QFileInfo>
 #include <QTextStream>
 #include <QtGlobal>
+#include <QDir>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #define QT_SKIP_EMPTY QString::SkipEmptyParts
@@ -159,10 +160,24 @@ DesktopKit::Core::Mime::getIconForMime(const std::string &mime)
     std::string icon;
     icon = getValueFromIconItems(getIcons(), mime);
     if ( icon.empty() ) { icon = getValueFromIconItems(getGenericIcons(), mime); }
-    if ( icon.empty() ) {
-        // should probably check if it's an alias before giving up?
+    if ( icon.empty() ) { // TODO: should probably check if it's an alias before giving up?
     }
+    // TODO: add fallback
     return icon;
+}
+
+const std::vector<std::string>
+DesktopKit::Core::Mime::getApplications()
+{
+    std::vector<std::string> result;
+    for ( auto &path : DesktopKit::Core::BaseDir::getApplicationsPaths() ) {
+        QStringList filter;
+        filter << "*.desktop" << "*.app" << "*.AppDir" << "*.AppImage";
+        QDir dir( QString::fromStdString(path) );
+        for ( auto &app : dir.entryList(filter) ) { result.push_back( QString("%1/%2").arg(dir.absolutePath(),
+                                                                                           app).toStdString() ); }
+    }
+    return result;
 }
 
 const std::vector<DesktopKit::Core::Mime::IconItem>

@@ -118,6 +118,7 @@ namespace DesktopKit
             static const std::vector<DesktopKit::Core::Mime::AppItem> getAppsInfo();
             static const std::vector<std::string> getAppsForMime(const std::string &mime);
             static const std::string getIconForMime(const std::string &mime);
+            static const std::vector<std::string> getApplications();
         private:
             static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile( const std::string &filename,
                                                                                              const std::string &splitter = std::string(":") );

@@ -56,7 +56,7 @@ Library that provide core functions.
 
 * `DesktopKit::Core::Common` - provides common functions
 * `DesktopKit::Core::BaseDir` - provides paths for standarized directories
-* `DesktopKit::Core::Mimes` - provides mime functions
+* `DesktopKit::Core::Mime` - provides mime functions
 
 ### App
 
