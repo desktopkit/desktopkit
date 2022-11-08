@@ -129,5 +129,14 @@ int main()
     for ( auto &app : Mime::getApplications() ) { std::cout << app << std::endl; }
     std::cout << std::endl;
 
+    std::cout << "Mime::getApplicationItems: " << std::endl;
+    for ( auto &app : Mime::getApplicationItems() ) {
+        std::cout << "   * name: " << app.name << std::endl;
+        std::cout << "      - comment: " << app.comment << std::endl;
+        std::cout << "      - icon: " << app.icon << std::endl;
+        std::cout << "      - exec: " << app.exec << std::endl;
+    }
+    std::cout << std::endl;
+
     return 0;
 }

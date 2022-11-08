@@ -107,6 +107,31 @@ namespace DesktopKit
                 std::vector<std::string> apps;
                 std::vector<std::string> files;
             };
+            /*struct LangItem {
+                std::string lang;
+                std::string value;
+            };*/
+            struct DesktopItem {
+                std::string entry;
+                std::string name;
+                //std::vector<DesktopKit::Core::Mime::LangItem> names;
+                std::string generic;
+                //std::vector<DesktopKit::Core::Mime::LangItem> generics;
+                std::string comment;
+                //std::vector<DesktopKit::Core::Mime::LangItem> comments;
+                std::string exec;
+                std::string icon;
+                std::string type;
+                bool terminal = false;
+                bool display = true;
+                std::vector<std::string> categories;
+                std::vector<std::string> mimes;
+                std::vector<std::string> actions;
+                std::vector<std::string> keywords;
+                std::vector<DesktopKit::Core::Mime::DesktopItem> actionItems;
+                std::vector<std::string> onlyShowIn;
+                bool startupNotify = false;
+            };
             static const std::string getType(const std::string &filename);
             static const std::vector<DesktopKit::Core::Mime::MimeItem> getItems(bool incAlias = true,
                                                                                 bool incGlobs = true,
@@ -119,6 +144,7 @@ namespace DesktopKit
             static const std::vector<std::string> getAppsForMime(const std::string &mime);
             static const std::string getIconForMime(const std::string &mime);
             static const std::vector<std::string> getApplications();
+            static const std::vector<DesktopKit::Core::Mime::DesktopItem> getApplicationItems();
         private:
             static const std::vector<DesktopKit::Core::Mime::IconItem> getMimeIconsFromFile( const std::string &filename,
                                                                                              const std::string &splitter = std::string(":") );

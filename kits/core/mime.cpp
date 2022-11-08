@@ -34,6 +34,7 @@
 #include <QTextStream>
 #include <QtGlobal>
 #include <QDir>
+#include <QSettings>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #define QT_SKIP_EMPTY QString::SkipEmptyParts
@@ -176,6 +177,36 @@ DesktopKit::Core::Mime::getApplications()
         QDir dir( QString::fromStdString(path) );
         for ( auto &app : dir.entryList(filter) ) { result.push_back( QString("%1/%2").arg(dir.absolutePath(),
                                                                                            app).toStdString() ); }
+    }
+    return result;
+}
+
+const std::vector<DesktopKit::Core::Mime::DesktopItem>
+DesktopKit::Core::Mime::getApplicationItems()
+{
+    std::vector<DesktopKit::Core::Mime::DesktopItem> result;
+    for ( auto &file : getApplications() ) {
+        DesktopKit::Core::Mime::DesktopItem item;
+        QFileInfo info( QString::fromStdString(file) );
+        if ( info.exists() &&
+             info.isFile() &&
+             info.suffix() == "desktop")
+        { // TODO: .desktop
+            QSettings ini(info.absoluteFilePath(), QSettings::IniFormat);
+            ini.beginGroup("Desktop Entry");
+            item.name = ini.value("Name").toString().toStdString();
+            item.comment = ini.value("Comment").toString().toStdString();
+            item.icon = ini.value("Icon").toString().toStdString();
+            if ( ini.value("TryExec").isValid() ) {
+                item.exec = ini.value("TryExec").toString().toStdString();
+            } else {
+                item.exec = ini.value("Exec").toString().toStdString();
+            }
+            ini.endGroup();
+            if ( !item.name.empty() && !item.exec.empty() ) { result.push_back(item); }
+        } else if ( DesktopKit::Core::BaseDir::isAppDir(file) ) {
+            // TODO: .AppDir
+        }
     }
     return result;
 }
